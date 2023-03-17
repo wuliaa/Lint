@@ -1,0 +1,24 @@
+apply plugin: 'java-library'
+apply plugin: 'com.android.lint'
+
+dependencies {
+
+    compileOnly "com.android.tools.lint:lint-api:27.1.1"
+    compileOnly "com.android.tools.lint:lint-checks:27.1.1"
+//    testImplementation "junit:junit:4.13.1"
+//    testImplementation "com.android.tools.lint:lint:27.1.2"
+//    testImplementation "com.android.tools.lint:lint-tests:27.1.2"
+//    testImplementation "com.android.tools:testutils:27.1.2"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+// jar 插件用于打包 Java 代码为 JAR 文件，而 manifest 块用于配置生成的 JAR 文件的清单文件
+// 将 LintRegistry 指定为自定义规则注册表
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "com.example.lintjar.LintRegistry")
+    }
+}
+

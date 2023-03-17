@@ -1,0 +1,4 @@
+rootProject.name = "Lint"
+include ':app'
+include ':lintjar'
+include ':lintarr'
