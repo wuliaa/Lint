@@ -33,5 +33,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(1);
 
         boolean a = getLocalClassName().equals(HTT);
+
+        boolean b = getLocalClassName().equals(HTT);
     }
 }
