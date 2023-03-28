@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'com.example.lintPlugin'
 
 android {
     compileSdkVersion 30
@@ -25,6 +26,13 @@ android {
         abortOnError true
         baseline file("lint-baseline.xml")
     }
+}
+
+lintConfig {
+    //配置Lint检查文件的类型
+    lintCheckFileType = ".java,.xml"
+    //是否将检查文件的所有扫描结果都输出
+    lintReportAll = true
 }
 
 

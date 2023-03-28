@@ -2,3 +2,4 @@ rootProject.name = "Lint"
 include ':app'
 include ':lintjar'
 include ':lintarr'
+include ':lintplugin'
