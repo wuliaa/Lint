@@ -1,5 +1,6 @@
 package com.example.lintjar.detector;
 
+import com.android.tools.lint.client.api.UElementHandler;
 import com.android.tools.lint.detector.api.Category;
 import com.android.tools.lint.detector.api.Detector;
 import com.android.tools.lint.detector.api.Implementation;
@@ -16,8 +17,10 @@ import com.intellij.psi.PsiModifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.uast.UCallExpression;
+import org.jetbrains.uast.UElement;
 import org.jetbrains.uast.UExpression;
 import org.jetbrains.uast.UReferenceExpression;
+import org.jetbrains.uast.util.UastExpressionUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,16 +44,37 @@ public class EqualsDetector extends Detector implements Detector.UastScanner {
 
     @Nullable
     @Override
-    public List<String> getApplicableMethodNames() {
-        return Collections.singletonList("equals");
+    public List<Class<? extends UElement>> getApplicableUastTypes() {
+        return Collections.singletonList(UCallExpression.class);
     }
 
+    @Nullable
     @Override
-    public void visitMethodCall(@NotNull JavaContext context, @NotNull UCallExpression node, @NotNull PsiMethod method) {
-        if (node.getValueArguments().get(0).asSourceString().startsWith("\"") &&
-                node.getValueArguments().get(1).asSourceString().endsWith("\"")
-                || isStaticFinalField(node)) {
-            reportError(context, node);
+    public UElementHandler createUastHandler(@NotNull JavaContext context) {
+        return new EqualsHandler(context);
+    }
+
+    class EqualsHandler extends UElementHandler {
+
+        private JavaContext context;
+
+        EqualsHandler(JavaContext context) {
+            this.context = context;
+        }
+
+        @Override
+        public void visitCallExpression(@NotNull UCallExpression node) {
+            if (!UastExpressionUtils.isMethodCall(node)) return;
+            if (node.getMethodName() != null) {
+                String methodName = node.getMethodName();
+                if (methodName.equals("equals")) {
+                    if (node.getValueArguments().get(0).asSourceString().startsWith("\"") &&
+                            node.getValueArguments().get(1).asSourceString().endsWith("\"")
+                            || isStaticFinalField(node)) {
+                        reportError(context, node);
+                    }
+                }
+            }
         }
     }
 

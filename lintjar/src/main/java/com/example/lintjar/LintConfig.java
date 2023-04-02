@@ -23,11 +23,12 @@ public class LintConfig {
     private Map<String, List<LintRule.Rule>> rules;
 
     public LintConfig(Context context) {
-        File projectDir = context.getProject().getDir();
-        File configFile = new File(projectDir, "lintConfig.json");
+        File projectDir = context.getProject().getDir().getAbsoluteFile();
+        File configFile = new File("/Users/zhangxiaohong/AndroidStudioProjects/Lint", "lintConfig.json");
         try {
             if (configFile.exists() && configFile.isFile()) {
-                String config = new String(Files.readAllBytes(Paths.get(projectDir + "/lintConfig.json")), StandardCharsets.UTF_8);
+                String config = new String(Files.readAllBytes(Paths.get("/Users/zhangxiaohong/AndroidStudioProjects/Lint/lintConfig.json")), StandardCharsets.UTF_8);
+                //System.out.println(Paths.get("/Users/zhangxiaohong/AndroidStudioProjects/Lint/lintConfig.json"));
                 Gson gson = new Gson();
                 rules = gson.fromJson(config, LintRule.class).getLintRules();
             }

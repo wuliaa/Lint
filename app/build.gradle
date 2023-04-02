@@ -32,7 +32,7 @@ lintConfig {
     //配置Lint检查文件的类型
     lintCheckFileType = ".java,.xml"
     //是否将检查文件的所有扫描结果都输出
-    lintReportAll = true
+    lintReportAll = false
 }
 
 

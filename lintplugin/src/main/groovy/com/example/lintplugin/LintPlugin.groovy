@@ -55,7 +55,7 @@ class LintPlugin implements Plugin<Project> {
                 def cl = new LintIncrementClient()
                 // LintCliFlags 用于设置Lint检查的一些标志
                 def flag = cl.flags
-                flag.setExitCode = true
+                //flag.setExitCode = true
 
                 // HtmlReport 输出HTML格式的报告 输出路径:/{$rootDir}/lint-all-result.html
 //                Reporter reporter = new HtmlReporter(cl, new File("lint-result.html"), flag)

@@ -13,7 +13,7 @@ buildscript {
         classpath 'com.android.tools.lint:lint:27.1.1'
         classpath 'com.android.tools.build:gradle:4.1.1'
         //classpath 'org.codehaus.groovy:groovy-all:2.5.11'
-        classpath 'com.example:lintPlugin:1.0.4.14'
+        classpath 'com.example:lintPlugin:1.0.0.4'
 
     }
 }
