@@ -1,0 +1,3 @@
+#!/bin/sh
+$HOME/AndroidStudioProjects/Lint/./gradlew lintPlugin
+exit 0

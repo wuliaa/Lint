@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 4.1.1">
+
+    <issue
+        id="LogUsage"
+        severity="Warning"
+        message="请勿直接调用 android.util.Log 类方法"
+        category="Correctness"
+        priority="6"
+        summary="Log Usage"
+        explanation="Please use the unified LogUtil class!"
+        errorLine1="        Log.d(&quot;111&quot;, &quot;test&quot;);"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="java/com/example/lint/MainActivity.java"
+            line="21"
+            column="9"/>
+    </issue>
+
+</issues>
